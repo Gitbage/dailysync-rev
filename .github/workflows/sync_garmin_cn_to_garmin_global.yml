@@ -5,7 +5,7 @@ on:
   schedule:
     #  每6小时检查一次 #- cron: "0 */6 * * *"
     # 时差
-    - cron: "*/20 6 * * *"
+    - cron: "*/20 10-11 * * *"
   push:
     branches:
       - main
