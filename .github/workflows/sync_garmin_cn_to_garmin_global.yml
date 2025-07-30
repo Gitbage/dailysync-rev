@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     # 每6小时检查一次 #- cron: "0 */6 * * *"
-    # 时差 +8
+    # 时差 +8 18,19
     - cron: "*/22 10-11 * * *"
-    # second 
-    - cron: '0 17,18 * * *'
+    # 17+8=25=1, 26=2
+    - cron: '0 0,1,17,18 * * *'
   push:
     branches:
       - main
