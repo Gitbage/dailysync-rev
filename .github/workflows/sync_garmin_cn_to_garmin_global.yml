@@ -42,6 +42,7 @@ jobs:
           # 设置时区为UTC+8（上海时区），然后格式化输出
           current_time=$(TZ='Asia/Shanghai' date +"%Y-%m-%d %H:%M:%S (UTC+8)")
           echo "Current time UTC+8: $current_time"
+          echo "a"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
