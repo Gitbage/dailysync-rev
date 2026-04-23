@@ -43,8 +43,8 @@ jobs:
           current_time=$(TZ='Asia/Shanghai' date +"%Y-%m-%d %H:%M:%S (UTC+8)")
           echo "Current time UTC+8: $current_time"
           echo "a"
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'yarn'
