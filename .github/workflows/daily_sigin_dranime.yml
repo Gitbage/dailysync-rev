@@ -1,0 +1,34 @@
+# .github/workflows/sign.yml
+name: Daily Sign-in Dranime
+on:
+  schedule:
+    - cron: '0 1 * * *'  # UTC 1:00 = 北京时间 9:00
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Sign in
+        env:
+          #COOKIES: ${{ secrets.DRANIME_COOKIES }}
+          #FORMHASH: ${{ secrets.DRANIME_FORMHASH }}
+          COOKIES: "wyp7_2132_saltkey=X1zkhV9H; wyp7_2132_lastvisit=1780734066; wyp7_2132_cloudflare_check=1; wyp7_2132__refer=%252Fhome.php%253Fmod%253Dspacecp%2526ac%253Dprofile%2526op%253Dpassword; wyp7_2132_seccodecSAcqircn282=404.bbda8b557a9b1b2a74; wyp7_2132_seccodecSrcn282=405.2d167ee5761f46630e; wyp7_2132_auth=767aaPDNqsxGyWrmgpmVvNtubzzfDbZjDBhyv2%2FbTg7939x12lXXi7oKf7ls%2Bo9h5%2FDTysBo3v2Pu7VBrLF4nkcweGk; wyp7_2132_nofavfid=1; wyp7_2132_study_nge_extstyle=6; wyp7_2132_study_nge_extstyle_default=6; wyp7_2132_blueidea_login=1; wyp7_2132_smile=1D1; wyp7_2132_study_guide=1314; wyp7_2132_sid=mU8Rgi; wyp7_2132_lip=120.230.101.173%2C1780922783; haspost_302755=5; wyp7_2132_styleuid=302755; wyp7_2132_ulastactivity=6192oMz3bsnMjY%2BYtBpteVMBgJ%2FqBQmLfoaiuntceyIqi9XjSKqJ; wyp7_2132_st_t=302755%7C1781196811%7C14ccb9ddd51530910380a3dd41c1c6c9; wyp7_2132_forum_lastvisit=D_92_1780918490D_53_1781196811; wyp7_2132_st_p=302755%7C1781196916%7Cae3efd0eda9aaaeddd48fc1170cd3b71; wyp7_2132_visitedfid=2D53D44D86D99D92D50D83; wyp7_2132_viewid=tid_46039; wyp7_2132_sendmail=1; wyp7_2132_checkpm=1; wyp7_2132_lastact=1781197032%09misc.php%09patch"          
+          FORMHASH: "04bc7ffc"
+          TODAYSAY: "今天签到"
+        run: |
+          curl -s 'https://www.dranime.net/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1' \
+            -H 'content-type: application/x-www-form-urlencoded' \
+            -H "cookie: $COOKIES" \
+            -H 'referer: https://www.dranime.net/dsu_paulsign-sign.html' \            
+            --data-raw "formhash=${FORMHASH}&qdxq=ng&qdmode=1&todaysay=${TODAYSAY}&fastreply=0" \
+            --compressed | tee response.html
+          
+          if grep -q "签到成功\|已签到" response.html; then
+            echo "✅ 签到成功"
+          else
+            echo "❌ 签到可能失败，请检查"
+            exit 1
+          fi
