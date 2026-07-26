@@ -32,8 +32,8 @@ jobs:
           cat response.html
           pwd
           ls -alth
-          
-          if grep -q "签到成功\|已签到" response.html; then
+
+          if grep -q "签到成功\|已经签到" response.html; then
             echo "✅ 签到成功"
           else
             echo "❌ 签到可能失败，请检查"
