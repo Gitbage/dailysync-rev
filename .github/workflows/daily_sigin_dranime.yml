@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Sign in
+      - name: Sign in Dranime
         env:
           #COOKIES: ${{ secrets.DRANIME_COOKIES }}
           #FORMHASH: ${{ secrets.DRANIME_FORMHASH }}
@@ -28,6 +28,10 @@ jobs:
             -H 'referer: https://www.dranime.net/dsu_paulsign-sign.html' \
             --data-raw "formhash=${FORMHASH}&qdxq=ng&qdmode=1&todaysay=${TODAYSAY}&fastreply=0" \
             --compressed | tee response.html
+          
+          cat response.html
+          pwd
+          ls -alth
           
           if grep -q "签到成功\|已签到" response.html; then
             echo "✅ 签到成功"
