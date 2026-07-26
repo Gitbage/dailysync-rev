@@ -29,8 +29,8 @@ jobs:
             --data-raw "formhash=${FORMHASH}&qdxq=ng&qdmode=1&todaysay=${TODAYSAY}&fastreply=0" \
             --compressed | tee response.html
           
-          cat response.html
           pwd
+          cat response.html
           ls -alth
 
           if grep -q "签到成功\|已经签到" response.html; then
