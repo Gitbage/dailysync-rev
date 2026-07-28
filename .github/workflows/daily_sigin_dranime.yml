@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+      - name: Print TimeZone
+        run: |
+          echo "UTC time: $(date -u)"
+          echo "Local runner time: $(date)"
+          echo "GMT+8: $(TZ=Asia/Shanghai date)"
       - name: Sign in Dranime
         env:
           #COOKIES: ${{ secrets.DRANIME_COOKIES }}
