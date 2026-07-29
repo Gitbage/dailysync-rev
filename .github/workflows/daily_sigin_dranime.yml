@@ -25,6 +25,8 @@ jobs:
           # ========= Basic configuration =========
           UA="Mozilla/5.0"
           REFERER="https://www.dranime.net/dsu_paulsign-sign.html"
+          CHECK_URL="https://www.dranime.net/dsu_paulsign-sign.html"
+          SIGN_URL="https://www.dranime.net/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1"
 
           # Send an HTTP request and append the HTTP status code
           request() {
@@ -51,9 +53,8 @@ jobs:
           TODAYSAY="${sayings[$random_index]}"
 
           # ========= Check today's sign-in status =========
-          URL="https://www.dranime.net/dsu_paulsign-sign.html"
           echo "Checking today's sign-in status..."
-          RESPONSE=$(request "$URL")
+          RESPONSE=$(request "$CHECK_URL")
 
           # Split the response into HTTP status code and response body
           HTTP_CODE="${RESPONSE##*$'\n'}"
@@ -75,10 +76,8 @@ jobs:
           fi
 
           # ========= Submit today's sign-in =========
-          URL="https://www.dranime.net/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1"
-
           echo "Submitting sign-in request..."
-          RESPONSE=$(request "$URL" \
+          RESPONSE=$(request "$SIGN_URL" \
               -H "Content-Type: application/x-www-form-urlencoded" \
               -H "Accept: */*" \
               -H "Accept-Language: zh-CN,zh;q=0.9" \
