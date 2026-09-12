@@ -2,7 +2,7 @@
 name: Daily Sign-in Dranime
 on:
   schedule:
-    - cron: '0 18 * * *' # 每天 18:00 UTC (北京时间 02:00) 触发
+    - cron: '0 19 * * *' # 每天 18:00 UTC (北京时间 02:00) 触发
   workflow_dispatch:  # 支持手动触发
 
 jobs:
