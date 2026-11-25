@@ -67,6 +67,7 @@ jobs:
           # Verify that the request completed successfully
           if [ "$HTTP_CODE" -ne 200 ]; then
               echo "❌ Failed to load sign-in page (HTTP $HTTP_CODE)"
+              echo "Response body: ${BODY}"
               exit 1
           fi
 
