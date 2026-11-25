@@ -62,7 +62,13 @@ jobs:
           BODY="${RESPONSE%$'\n'*}"
 
           echo "HTTP status: ${HTTP_CODE}"          
-          echo "Response body: ${BODY}" | grep -B1 -A10 "您累计已签到"
+          if grep -q "您累计已签到" <<< "$BODY"; then
+            grep -B1 -A10 "您累计已签到" <<< "$BODY"
+          else
+            echo "Response body:"
+            echo "$BODY"
+            echo "====================================================="
+          fi
 
           # Verify that the request completed successfully
           if [ "$HTTP_CODE" -ne 200 ]; then
