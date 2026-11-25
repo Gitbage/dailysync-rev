@@ -24,7 +24,7 @@ jobs:
           #set -Eeuo pipefail
 
           # ========= Basic configuration =========
-          UA="Mozilla/5.0"
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
           REFERER="https://www.dranime.net/dsu_paulsign-sign.html"
           CHECK_URL="https://www.dranime.net/dsu_paulsign-sign.html"
           SIGN_URL="https://www.dranime.net/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1"
