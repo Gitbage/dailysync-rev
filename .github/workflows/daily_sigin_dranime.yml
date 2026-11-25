@@ -61,8 +61,7 @@ jobs:
           HTTP_CODE="${RESPONSE##*$'\n'}"
           BODY="${RESPONSE%$'\n'*}"
 
-          echo "HTTP status: ${HTTP_CODE}"
-          echo "Response body: ${BODY}"
+          echo "HTTP status: ${HTTP_CODE}"          
           echo "Response body: ${BODY}" | grep -B1 -A10 "您累计已签到"
 
           # Verify that the request completed successfully
